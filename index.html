@@ -1,219 +1,210 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Meu Segredo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <title>Tutorial Telegram</title>
   <style>
     :root {
-      --pink-1: #ffe6f0;
-      --pink-2: #ffd1e3;
-      --pink-3: #ffb6d5;
-      --rose: #ff6fa8;
-      --wine: #7a1c4a;
-      --white: #ffffff;
+      --bg: #0b0b0d;
+      --card: #141418;
+      --card-2: #1b1b22;
+      --pink-1: #ff4fb3;
+      --pink-2: #ff7ad1;
+      --pink-3: #ff9be0;
+      --text: #f5f5f7;
+      --muted: #b6b6c0;
+      --danger: #ff4f6e;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
+      font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(255, 79, 179, 0.25), transparent 60%),
+        radial-gradient(800px 500px at 90% 0%, rgba(255, 122, 209, 0.22), transparent 55%),
+        radial-gradient(700px 700px at 50% 120%, rgba(255, 155, 224, 0.2), transparent 60%),
+        var(--bg);
+      color: var(--text);
       min-height: 100vh;
       display: grid;
       place-items: center;
-      font-family: "Cormorant Garamond", "Didot", "Bodoni MT", "Georgia", serif;
-      color: var(--wine);
-      background-image: url('photo_4915878464901024825_y.jpg'), linear-gradient(135deg, var(--pink-1), var(--pink-2), var(--pink-3));
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+      padding: 32px 16px;
+    }
+
+    .card {
+      width: min(520px, 94vw);
+      border-radius: 24px;
+      background: linear-gradient(180deg, var(--card), var(--card-2));
+      border: 1px solid rgba(255, 122, 209, 0.18);
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(255, 122, 209, 0.08) inset;
+      padding: 22px 22px 24px;
+      position: relative;
       overflow: hidden;
     }
 
-
-    #neon {
-      position: fixed;
-      inset: -10vh -10vw;
-      width: 120vw;
-      height: 120vh;
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 24px;
+      background: conic-gradient(from 180deg, rgba(255,79,179,0.5), rgba(255,155,224,0.1), rgba(255,79,179,0.5));
+      opacity: 0.25;
       z-index: 0;
     }
 
-    .bg-shape {
-        display: none !important;
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      filter: blur(30px);
-      opacity: 0.45;
-    }
-
-    .shape-1 {
-      background: #ffd5e8;
-      top: -120px;
-      left: -80px;
-    }
-
-    .shape-2 {
-      background: #ffc1dd;
-      bottom: -140px;
-      right: -60px;
-    }
-
-    .cta {
+    .inner {
       position: relative;
       z-index: 1;
-      display: inline-flex;
-      align-items: center;
+      background: rgba(14, 14, 18, 0.85);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: inset 0 0 0 1px rgba(255, 122, 209, 0.08);
+    }
+
+    .title {
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: 0.08em;
+      margin: 2px 0 16px;
+      font-size: 15px;
+      color: var(--pink-3);
+    }
+
+    .title span { color: #fff; }
+
+    .media {
+      width: 100%;
+      border-radius: 12px;
+      background: #222;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      border: 1px dashed rgba(255, 122, 209, 0.35);
+    }
+
+    .steps {
+      margin: 16px 2px 12px;
+      padding: 0;
+      list-style: none;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 26px 1fr;
       gap: 10px;
-      padding: 22px 48px;
-      background: linear-gradient(135deg, #ff4f9a, #ff1f7a);
-      color: var(--white);
-      font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
-      font-size: clamp(18px, 3.6vw, 24px);
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      border-radius: 999px;
-      border: 2px solid rgba(255, 255, 255, 0.8);
-      text-decoration: none;
-      box-shadow:
-        0 18px 40px rgba(255, 31, 122, 0.45),
-        0 0 0 6px rgba(255, 255, 255, 0.35);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      animation: pulse 2.2s ease-in-out infinite;
+      margin: 6px 0;
+      align-items: start;
     }
 
-    .cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 34px rgba(255, 95, 158, 0.45);
+    .num {
+      color: var(--pink-1);
+      font-weight: 800;
     }
 
-    .cta:active {
-      transform: translateY(0);
+    .steps strong {
+      color: var(--pink-2);
     }
 
-    .plane {
-      width: 22px;
-      height: 22px;
+    .btn {
+      margin-top: 12px;
+      width: 100%;
+      padding: 14px 16px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--pink-1), var(--pink-2));
+      color: #1a0b14;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(255, 79, 179, 0.35);
     }
 
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow:
-          0 18px 40px rgba(255, 31, 122, 0.45),
-          0 0 0 6px rgba(255, 255, 255, 0.35);
-      }
-      50% {
-        transform: scale(1.06);
-        box-shadow:
-          0 24px 54px rgba(255, 31, 122, 0.65),
-          0 0 0 10px rgba(255, 255, 255, 0.45);
-      }
+    .status {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
     }
-    #give-freely-root-ejkiikneibegknkgimmihdpcbcedgmpo
-    {
-        display: none !important;
+
+    .hint {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .arrow {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--pink-2);
+      border-top: 0;
+      border-left: 0;
+      transform: rotate(45deg);
     }
   </style>
 </head>
 <body>
-  <canvas id="neon" aria-hidden="true"></canvas>
-  <div class="bg-shape shape-1" aria-hidden="true"></div>
-  <div class="bg-shape shape-2" aria-hidden="true"></div>
+  <div class="card">
+    <div class="inner">
+      <div class="title"><span>SIGA O TUTORIAL ABAIXO</span> ⬇</div>
 
-  
-    <a class="cta" href="https://t.me/millyfariabot" target="_blank" rel="noopener noreferrer">
-      <span>Meu Segredo</span>
-      <svg class="plane" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M3 12L21 3L14 21L11 13L3 12Z" fill="currentColor"/>
-      </svg>
-    </a>
+      <div class="media">
+        <img style="max-width: 100%; border-radius: 12px;" src="tutorial.gif">
+      </div>
+
+      <ul class="steps">
+        <li style="display: flex; font-size: 1rem;"><span class="num">1)</span> <span>Toque nos <strong>três pontinhos</strong> (canto superior da tela)</span></li>
+        <li style="display: flex; font-size: 1rem;"><span class="num">2)</span> <span> Escolha <strong>"Abrir no navegador"</strong></span></li>
+        <li style="display: flex; font-size: 1rem;"><span class="num">3)</span> <span> Agora toque no botão rosa para abrir o Telegram </span></li>
+      </ul>
+
+      <button style="font-size: 1rem; font-weight: bold;" class="btn" id="telegramBtn" disabled>
+        ABRIR TELEGRAM (5)
+      </button>
+      <div style="margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">REDIRECIONANDO EM 5s...</div>
+      <div style="font-size: .8rem;" class="hint"><span  style="margin-bottom: 18px; margin-right: 18px;" class="arrow"></span> Dica: use o navegador</div>
+    </div>
+  </div>
+
   <script>
-    const canvas = document.getElementById("neon");
-    const ctx = canvas.getContext("2d");
+    (function () {
+      var seconds = 5;
+      var btn = document.getElementById("telegramBtn");
+      var status = document.getElementById("statusText");
+      var url = "https://t.me/millyfariabot";
 
-    const beams = [];
-    const beamCount = 8;
-
-    function resize() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = Math.floor(window.innerWidth * 1.2);
-      const h = Math.floor(window.innerHeight * 1.2);
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-
-    function createBeam() {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      return {
-        x: Math.random() * w,
-        y: Math.random() * h,
-        w: 140 + Math.random() * 260,
-        h: 24 + Math.random() * 70,
-        angle: Math.random() * Math.PI,
-        speed: 0.2 + Math.random() * 0.6,
-        hue: 300 + Math.random() * 60
-      };
-    }
-
-    function init() {
-      beams.length = 0;
-      for (let i = 0; i < beamCount; i++) beams.push(createBeam());
-    }
-
-    function drawBeam(b) {
-      const grad = ctx.createLinearGradient(
-        b.x - b.w,
-        b.y - b.h,
-        b.x + b.w,
-        b.y + b.h
-      );
-      grad.addColorStop(0, `hsla(${b.hue}, 100%, 60%, 0)`);
-      grad.addColorStop(0.5, `hsla(${b.hue}, 100%, 70%, 0.55)`);
-      grad.addColorStop(1, `hsla(${b.hue}, 100%, 60%, 0)`);
-
-      ctx.save();
-      ctx.translate(b.x, b.y);
-      ctx.rotate(b.angle);
-      ctx.fillStyle = grad;
-      ctx.globalCompositeOperation = "lighter";
-      ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h);
-      ctx.restore();
-    }
-
-    function animate() {
-      const w = window.innerWidth * 1.2;
-      const h = window.innerHeight * 1.2;
-      ctx.clearRect(0, 0, w, h);
-      for (const b of beams) {
-        b.x += Math.cos(b.angle) * b.speed;
-        b.y += Math.sin(b.angle) * b.speed;
-        if (b.x < -240) b.x = window.innerWidth + 240;
-        if (b.x > window.innerWidth + 240) b.x = -240;
-        if (b.y < -240) b.y = window.innerHeight + 240;
-        if (b.y > window.innerHeight + 240) b.y = -240;
-        drawBeam(b);
+      function tick() {
+        btn.textContent = "ABRIR TELEGRAM (" + seconds + ")";
+        status.textContent = "REDIRECIONANDO EM " + seconds + "s...";
+        if (seconds <= 0) {
+          btn.textContent = "ABRIR TELEGRAM";
+          status.textContent = "REDIRECIONANDO...";
+          window.location.href = url;
+          return;
+        }
+        seconds -= 1;
+        setTimeout(tick, 1000);
       }
-      requestAnimationFrame(animate);
-    }
 
-    window.addEventListener("resize", () => {
-      resize();
-      init();
-    });
-
-    resize();
-    init();
-    animate();
+      tick();
+      btn.addEventListener("click", function () {
+        window.location.href = url;
+      });
+    })();
   </script>
 </body>
 </html>

@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meu Segredo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <style>
+/* Troca a bolha por uma imagem sua */
+.woot-widget-bubble {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* coloca seu ícone */
+.woot-widget-bubble::before {
+  content: "";
+  width: 64px;
+  height: 64px;
+  display: block;
+  border-radius: 999px;
+  background: url("photo_4915878464901024825_y.jpg") center/cover no-repeat;
+}
+
+/* remove o ícone svg original (se existir) */
+.woot-widget-bubble svg,
+.woot-widget-bubble img {
+  display: none !important;
+}
+</style>
+<style>
+    :root {
+      --pink-1: #ffe6f0;
+      --pink-2: #ffd1e3;
+      --pink-3: #ffb6d5;
+      --rose: #ff6fa8;
+      --wine: #7a1c4a;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: "Cormorant Garamond", "Didot", "Bodoni MT", "Georgia", serif;
+      color: var(--wine);
+      background-image: url('photo_4915878464901024825_y.jpg'), linear-gradient(135deg, var(--pink-1), var(--pink-2), var(--pink-3));
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      overflow: hidden;
+    }
+
+
+    #neon {
+      position: fixed;
+      inset: -10vh -10vw;
+      width: 120vw;
+      height: 120vh;
+      z-index: 0;
+    }
+
+    .bg-shape {
+        display: none !important;
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(30px);
+      opacity: 0.45;
+    }
+
+    .shape-1 {
+      background: #ffd5e8;
+      top: -120px;
+      left: -80px;
+    }
+
+    .shape-2 {
+      background: #ffc1dd;
+      bottom: -140px;
+      right: -60px;
+    }
+
+    .cta {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 22px 48px;
+      background: linear-gradient(135deg, #ff4f9a, #ff1f7a);
+      color: var(--white);
+      font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+      font-size: clamp(18px, 3.6vw, 24px);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      box-shadow:
+        0 18px 40px rgba(255, 31, 122, 0.45),
+        0 0 0 6px rgba(255, 255, 255, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(255, 95, 158, 0.45);
+    }
+
+    .cta:active {
+      transform: translateY(0);
+    }
+
+    .plane {
+      width: 22px;
+      height: 22px;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow:
+          0 18px 40px rgba(255, 31, 122, 0.45),
+          0 0 0 6px rgba(255, 255, 255, 0.35);
+      }
+      50% {
+        transform: scale(1.06);
+        box-shadow:
+          0 24px 54px rgba(255, 31, 122, 0.65),
+          0 0 0 10px rgba(255, 255, 255, 0.45);
+      }
+    }
+    #give-freely-root-ejkiikneibegknkgimmihdpcbcedgmpo
+    {
+        display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="neon" aria-hidden="true"></canvas>
+  <div class="bg-shape shape-1" aria-hidden="true"></div>
+  <div class="bg-shape shape-2" aria-hidden="true"></div>
+
+  
+    <a class="cta" href="https://t.me/millyfariabot" target="_blank" rel="noopener noreferrer">
+      <span>Meu Segredo</span>
+      <svg class="plane" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 12L21 3L14 21L11 13L3 12Z" fill="currentColor"/>
+      </svg>
+    </a>
+  <script>
+    const canvas = document.getElementById("neon");
+    const ctx = canvas.getContext("2d");
+
+    const beams = [];
+    const beamCount = 8;
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.floor(window.innerWidth * 1.2);
+      const h = Math.floor(window.innerHeight * 1.2);
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function createBeam() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        w: 140 + Math.random() * 260,
+        h: 24 + Math.random() * 70,
+        angle: Math.random() * Math.PI,
+        speed: 0.2 + Math.random() * 0.6,
+        hue: 300 + Math.random() * 60
+      };
+    }
+
+    function init() {
+      beams.length = 0;
+      for (let i = 0; i < beamCount; i++) beams.push(createBeam());
+    }
+
+    function drawBeam(b) {
+      const grad = ctx.createLinearGradient(
+        b.x - b.w,
+        b.y - b.h,
+        b.x + b.w,
+        b.y + b.h
+      );
+      grad.addColorStop(0, `hsla(${b.hue}, 100%, 60%, 0)`);
+      grad.addColorStop(0.5, `hsla(${b.hue}, 100%, 70%, 0.55)`);
+      grad.addColorStop(1, `hsla(${b.hue}, 100%, 60%, 0)`);
+
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.rotate(b.angle);
+      ctx.fillStyle = grad;
+      ctx.globalCompositeOperation = "lighter";
+      ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h);
+      ctx.restore();
+    }
+
+    function animate() {
+      const w = window.innerWidth * 1.2;
+      const h = window.innerHeight * 1.2;
+      ctx.clearRect(0, 0, w, h);
+      for (const b of beams) {
+        b.x += Math.cos(b.angle) * b.speed;
+        b.y += Math.sin(b.angle) * b.speed;
+        if (b.x < -240) b.x = window.innerWidth + 240;
+        if (b.x > window.innerWidth + 240) b.x = -240;
+        if (b.y < -240) b.y = window.innerHeight + 240;
+        if (b.y > window.innerHeight + 240) b.y = -240;
+        drawBeam(b);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", () => {
+      resize();
+      init();
+    });
+
+    resize();
+    init();
+    animate();
+  </script>
+  <script>
+  (function(d,t) {
+    var BASE_URL="https://app.chatwoot.com";
+    var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=BASE_URL+"/packs/js/sdk.js";
+    g.async = true;
+    s.parentNode.insertBefore(g,s);
+    g.onload=function(){
+      window.chatwootSDK.run({
+        websiteToken: 'tNTZqEnmewEgDnQnkaqcmX1y',
+        baseUrl: BASE_URL
+      })
+    }
+  })(document,"script");
+</script>
+
+</body>
+</html>
