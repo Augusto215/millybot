@@ -1,210 +1,210 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tutorial Telegram</title>
-  <style>
-    :root {
-      --bg: #0b0b0d;
-      --card: #141418;
-      --card-2: #1b1b22;
-      --pink-1: #ff4fb3;
-      --pink-2: #ff7ad1;
-      --pink-3: #ff9be0;
-      --text: #f5f5f7;
-      --muted: #b6b6c0;
-      --danger: #ff4f6e;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
-      background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(255, 79, 179, 0.25), transparent 60%),
-        radial-gradient(800px 500px at 90% 0%, rgba(255, 122, 209, 0.22), transparent 55%),
-        radial-gradient(700px 700px at 50% 120%, rgba(255, 155, 224, 0.2), transparent 60%),
-        var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 32px 16px;
-    }
-
-    .card {
-      width: min(520px, 94vw);
-      border-radius: 24px;
-      background: linear-gradient(180deg, var(--card), var(--card-2));
-      border: 1px solid rgba(255, 122, 209, 0.18);
-      box-shadow:
-        0 20px 60px rgba(0,0,0,0.55),
-        0 0 0 1px rgba(255, 122, 209, 0.08) inset;
-      padding: 22px 22px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      border-radius: 24px;
-      background: conic-gradient(from 180deg, rgba(255,79,179,0.5), rgba(255,155,224,0.1), rgba(255,79,179,0.5));
-      opacity: 0.25;
-      z-index: 0;
-    }
-
-    .inner {
-      position: relative;
-      z-index: 1;
-      background: rgba(14, 14, 18, 0.85);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: inset 0 0 0 1px rgba(255, 122, 209, 0.08);
-    }
-
-    .title {
-      font-weight: 800;
-      text-align: center;
-      letter-spacing: 0.08em;
-      margin: 2px 0 16px;
-      font-size: 15px;
-      color: var(--pink-3);
-    }
-
-    .title span { color: #fff; }
-
-    .media {
-      width: 100%;
-      border-radius: 12px;
-      background: #222;
-      display: grid;
-      place-items: center;
-      color: var(--muted);
-      font-size: 13px;
-      border: 1px dashed rgba(255, 122, 209, 0.35);
-    }
-
-    .steps {
-      margin: 16px 2px 12px;
-      padding: 0;
-      list-style: none;
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
-    .steps li {
-      display: grid;
-      grid-template-columns: 26px 1fr;
-      gap: 10px;
-      margin: 6px 0;
-      align-items: start;
-    }
-
-    .num {
-      color: var(--pink-1);
-      font-weight: 800;
-    }
-
-    .steps strong {
-      color: var(--pink-2);
-    }
-
-    .btn {
-      margin-top: 12px;
-      width: 100%;
-      padding: 14px 16px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--pink-1), var(--pink-2));
-      color: #1a0b14;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(255, 79, 179, 0.35);
-    }
-
-    .status {
-      margin-top: 10px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-
-    .hint {
-      display: inline-flex;
-      gap: 6px;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      margin-top: 8px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .arrow {
-      width: 18px;
-      height: 18px;
-      border: 2px solid var(--pink-2);
-      border-top: 0;
-      border-left: 0;
-      transform: rotate(45deg);
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <div class="inner">
-      <div class="title"><span>SIGA O TUTORIAL ABAIXO</span> ⬇</div>
-
-      <div class="media">
-        <img style="max-width: 100%; border-radius: 12px;" src="tutorial.gif">
-      </div>
-
-      <ul class="steps">
-        <li style="display: flex; font-size: 1rem;"><span class="num">1)</span> <span>Toque nos <strong>três pontinhos</strong> (canto superior da tela)</span></li>
-        <li style="display: flex; font-size: 1rem;"><span class="num">2)</span> <span> Escolha <strong>"Abrir no navegador"</strong></span></li>
-        <li style="display: flex; font-size: 1rem;"><span class="num">3)</span> <span> Agora toque no botão rosa para abrir o Telegram </span></li>
-      </ul>
-
-      <button style="font-size: 1rem; font-weight: bold;" class="btn" id="telegramBtn" disabled>
-        ABRIR TELEGRAM (5)
-      </button>
-      <div style="margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">REDIRECIONANDO EM 5s...</div>
-      <div style="font-size: .8rem;" class="hint"><span  style="margin-bottom: 18px; margin-right: 18px;" class="arrow"></span> Dica: use o navegador</div>
-    </div>
-  </div>
-
-  <script>
-    (function () {
-      var seconds = 5;
-      var btn = document.getElementById("telegramBtn");
-      var status = document.getElementById("statusText");
-      var url = "https://t.me/millyfariabot";
-
-      function tick() {
-        btn.textContent = "ABRIR TELEGRAM (" + seconds + ")";
-        status.textContent = "REDIRECIONANDO EM " + seconds + "s...";
-        if (seconds <= 0) {
-          btn.textContent = "ABRIR TELEGRAM";
-          status.textContent = "REDIRECIONANDO...";
-          window.location.href = url;
-          return;
-        }
-        seconds -= 1;
-        setTimeout(tick, 1000);
+  <!DOCTYPE html>
+  <html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tutorial Telegram</title>
+    <style>
+      :root {
+        --bg: #0b0b0d;
+        --card: #141418;
+        --card-2: #1b1b22;
+        --pink-1: #ff4fb3;
+        --pink-2: #ff7ad1;
+        --pink-3: #ff9be0;
+        --text: #f5f5f7;
+        --muted: #b6b6c0;
+        --danger: #ff4f6e;
       }
 
-      tick();
-      btn.addEventListener("click", function () {
-        window.location.href = url;
-      });
-    })();
-  </script>
-</body>
-</html>
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+        background:
+          radial-gradient(1200px 600px at 20% -10%, rgba(255, 79, 179, 0.25), transparent 60%),
+          radial-gradient(800px 500px at 90% 0%, rgba(255, 122, 209, 0.22), transparent 55%),
+          radial-gradient(700px 700px at 50% 120%, rgba(255, 155, 224, 0.2), transparent 60%),
+          var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 32px 16px;
+      }
+
+      .card {
+        width: min(520px, 94vw);
+        border-radius: 24px;
+        background: linear-gradient(180deg, var(--card), var(--card-2));
+        border: 1px solid rgba(255, 122, 209, 0.18);
+        box-shadow:
+          0 20px 60px rgba(0,0,0,0.55),
+          0 0 0 1px rgba(255, 122, 209, 0.08) inset;
+        padding: 22px 22px 24px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: 24px;
+        background: conic-gradient(from 180deg, rgba(255,79,179,0.5), rgba(255,155,224,0.1), rgba(255,79,179,0.5));
+        opacity: 0.25;
+        z-index: 0;
+      }
+
+      .inner {
+        position: relative;
+        z-index: 1;
+        background: rgba(14, 14, 18, 0.85);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: inset 0 0 0 1px rgba(255, 122, 209, 0.08);
+      }
+
+      .title {
+        font-weight: 800;
+        text-align: center;
+        letter-spacing: 0.08em;
+        margin: 2px 0 16px;
+        font-size: 15px;
+        color: var(--pink-3);
+      }
+
+      .title span { color: #fff; }
+
+      .media {
+        width: 100%;
+        border-radius: 12px;
+        background: #222;
+        display: grid;
+        place-items: center;
+        color: var(--muted);
+        font-size: 13px;
+        border: 1px dashed rgba(255, 122, 209, 0.35);
+      }
+
+      .steps {
+        margin: 16px 2px 12px;
+        padding: 0;
+        list-style: none;
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+
+      .steps li {
+        display: grid;
+        grid-template-columns: 26px 1fr;
+        gap: 10px;
+        margin: 6px 0;
+        align-items: start;
+      }
+
+      .num {
+        color: var(--pink-1);
+        font-weight: 800;
+      }
+
+      .steps strong {
+        color: var(--pink-2);
+      }
+
+      .btn {
+        margin-top: 12px;
+        width: 100%;
+        padding: 14px 16px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--pink-1), var(--pink-2));
+        color: #1a0b14;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(255, 79, 179, 0.35);
+      }
+
+      .status {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 12px;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+      }
+
+      .hint {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 8px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .arrow {
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--pink-2);
+        border-top: 0;
+        border-left: 0;
+        transform: rotate(45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="inner">
+        <div class="title"><span>SIGA O TUTORIAL ABAIXO</span> ⬇</div>
+
+        <div class="media">
+          <img style="max-width: 100%; border-radius: 12px;" src="tutorial.gif">
+        </div>
+
+        <ul class="steps">
+          <li style="display: flex; font-size: 1rem;"><span class="num">1)</span> <span>Toque nos <strong>três pontinhos</strong> (canto superior da tela)</span></li>
+          <li style="display: flex; font-size: 1rem;"><span class="num">2)</span> <span> Escolha <strong>"Abrir no navegador"</strong></span></li>
+          <li style="display: flex; font-size: 1rem;"><span class="num">3)</span> <span> Agora toque no botão rosa para abrir o Telegram </span></li>
+        </ul>
+
+        <button style="font-size: 1rem; font-weight: bold;" class="btn" id="telegramBtn" disabled>
+          ABRIR TELEGRAM (5)
+        </button>
+        <div style="margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">REDIRECIONANDO EM 5s...</div>
+        <div style="font-size: .8rem;" class="hint"><span  style="margin-bottom: 18px; margin-right: 18px;" class="arrow"></span> Dica: use o navegador</div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var seconds = 5;
+        var btn = document.getElementById("telegramBtn");
+        var status = document.getElementById("statusText");
+        var url = "https://t.me/millyfaria_bot";
+
+        function tick() {
+          btn.textContent = "ABRIR TELEGRAM (" + seconds + ")";
+          status.textContent = "REDIRECIONANDO EM " + seconds + "s...";
+          if (seconds <= 0) {
+            btn.textContent = "ABRIR TELEGRAM";
+            status.textContent = "REDIRECIONANDO...";
+            window.location.href = url;
+            return;
+          }
+          seconds -= 1;
+          setTimeout(tick, 1000);
+        }
+
+        tick();
+        btn.addEventListener("click", function () {
+          window.location.href = url;
+        });
+      })();
+    </script>
+  </body>
+  </html>
