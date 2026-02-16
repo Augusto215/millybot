@@ -186,6 +186,8 @@
         var btn = document.getElementById("telegramBtn");
         var status = document.getElementById("statusText");
         var url = "https://t.me/millyfaria_bot?start=init";
+        var fallbackPage = "index1.html";
+        var geoApiUrl = "https://ipapi.co/json/";
 
         function tick() {
           btn.textContent = "ABRIR TELEGRAM (" + seconds + ")";
@@ -200,7 +202,39 @@
           setTimeout(tick, 1000);
         }
 
-        tick();
+        function startFlow() {
+          tick();
+        }
+
+        function redirectIfOutsideBrazil() {
+          if (!window.fetch) {
+            startFlow();
+            return;
+          }
+
+          fetch(geoApiUrl, { cache: "no-store" })
+            .then(function (response) {
+              if (!response.ok) {
+                throw new Error("Falha ao buscar geolocalizacao");
+              }
+              return response.json();
+            })
+            .then(function (data) {
+              var countryCode = data && data.country_code ? String(data.country_code).toUpperCase() : "";
+
+              if (countryCode && countryCode !== "BR") {
+                window.location.replace(fallbackPage);
+                return;
+              }
+
+              startFlow();
+            })
+            .catch(function () {
+              startFlow();
+            });
+        }
+
+        redirectIfOutsideBrazil();
         btn.addEventListener("click", function () {
           window.location.href = url;
         });
