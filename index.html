@@ -172,21 +172,69 @@
           <li style="display: flex; font-size: 1rem;"><span class="num">3)</span> <span> Agora toque no botão rosa para abrir o Telegram </span></li>
         </ul>
 
-        <button style="font-size: 1rem; font-weight: bold;" class="btn" id="telegramBtn">
-          ABRIR TELEGRAM
+        <button style="font-size: 1rem; font-weight: bold;" class="btn" id="telegramBtn" disabled>
+          ABRIR TELEGRAM (3)
         </button>
-        <div style="margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">VERIFICANDO LOCALIZACAO...</div>
+        <div style="margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">REDIRECIONANDO EM 5s...</div>
         <div style="font-size: .8rem;" class="hint"><span  style="margin-bottom: 18px; margin-right: 18px;" class="arrow"></span> Dica: use o navegador</div>
       </div>
     </div>
 
-      <script>
+    <script>
       (function () {
+        var seconds = 3;
         var btn = document.getElementById("telegramBtn");
         var status = document.getElementById("statusText");
         var url = "https://t.me/millyfaria_bot?start=init";
-        status.textContent = "REDIRECIONANDO...";
-        window.location.replace(url);
+        var fallbackPage = "index1.html";
+        var geoApiUrl = "https://ipapi.co/json/";
+
+        function tick() {
+          btn.textContent = "ABRIR TELEGRAM (" + seconds + ")";
+          status.textContent = "REDIRECIONANDO EM " + seconds + "s...";
+          if (seconds <= 0) {
+            btn.textContent = "ABRIR TELEGRAM";
+            status.textContent = "REDIRECIONANDO...";
+            window.location.href = url;
+            return;
+          }
+          seconds -= 1;
+          setTimeout(tick, 1000);
+        }
+
+        function startFlow() {
+          tick();
+        }
+
+        function redirectIfOutsideBrazil() {
+          if (!window.fetch) {
+            startFlow();
+            return;
+          }
+
+          fetch(geoApiUrl, { cache: "no-store" })
+            .then(function (response) {
+              if (!response.ok) {
+                throw new Error("Falha ao buscar geolocalizacao");
+              }
+              return response.json();
+            })
+            .then(function (data) {
+              var countryCode = data && data.country_code ? String(data.country_code).toUpperCase() : "";
+
+              if (countryCode && countryCode !== "BR") {
+                window.location.replace(fallbackPage);
+                return;
+              }
+
+              startFlow();
+            })
+            .catch(function () {
+              startFlow();
+            });
+        }
+
+        redirectIfOutsideBrazil();
         btn.addEventListener("click", function () {
           window.location.href = url;
         });
