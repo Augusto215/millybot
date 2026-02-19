@@ -188,7 +188,7 @@
         var btn = document.getElementById("telegramBtn");
         var status = document.getElementById("statusText");
         var url = "https://t.me/millyfaria4_bot?start=init";
-        var fallbackPage = "index1.html";
+        var foreignRedirectUrl = "https://www.fanvue.com/millyfaria/fv-1";
         var geoApiUrl = "https://ipapi.co/country/";
         var finished = false;
         var countdownTimer = null;
@@ -237,7 +237,7 @@
           }
           btn.textContent = "ABRIR TELEGRAM";
           status.textContent = "REDIRECIONANDO...";
-          window.location.replace(fallbackPage);
+          window.location.replace(foreignRedirectUrl);
         }
 
         function tick() {
