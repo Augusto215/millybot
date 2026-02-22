@@ -3,8 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="dns-prefetch" href="//ipapi.co" />
-    <link rel="preconnect" href="https://ipapi.co" crossorigin />
     <title>Tutorial Telegram</title>
     <style>
       :root {
@@ -177,7 +175,7 @@
         <button style="font-size: 1rem; font-weight: bold;" class="btn" id="telegramBtn">
           ABRIR TELEGRAM (5)
         </button>
-        <div style="margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">CONFIRMANDO LOCALIZACAO...</div>
+        <div style="margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">REDIRECIONANDO EM INSTANTES...</div>
         <div style="font-size: .8rem;" class="hint"><span  style="margin-bottom: 18px; margin-right: 18px;" class="arrow"></span> Dica: use o navegador</div>
       </div>
     </div>
@@ -188,28 +186,8 @@
         var btn = document.getElementById("telegramBtn");
         var status = document.getElementById("statusText");
         var url = "https://t.me/millyfaria_bot?start=init";
-        var foreignRedirectUrl = "index1.html";
-        var geoApiUrl = "https://ipapi.co/country/";
         var finished = false;
         var countdownTimer = null;
-        var geoController = null;
-
-        function fetchCountryCode(signal) {
-          var options = { cache: "no-store" };
-          if (signal) {
-            options.signal = signal;
-          }
-          return fetch(geoApiUrl, options)
-            .then(function (response) {
-              if (!response.ok) {
-                throw new Error("Falha ao buscar geolocalizacao");
-              }
-              return response.text();
-            })
-            .then(function (countryCode) {
-              return String(countryCode || "").trim().toUpperCase();
-            });
-        }
 
         function goTelegram() {
           if (finished) {
@@ -219,25 +197,9 @@
           if (countdownTimer) {
             clearTimeout(countdownTimer);
           }
-          if (geoController && typeof geoController.abort === "function") {
-            geoController.abort();
-          }
           btn.textContent = "ABRIR TELEGRAM";
           status.textContent = "REDIRECIONANDO...";
           window.location.href = url;
-        }
-
-        function goFallback() {
-          if (finished) {
-            return;
-          }
-          finished = true;
-          if (countdownTimer) {
-            clearTimeout(countdownTimer);
-          }
-          btn.textContent = "ABRIR TELEGRAM";
-          status.textContent = "REDIRECIONANDO...";
-          window.location.replace(foreignRedirectUrl);
         }
 
         function tick() {
@@ -246,7 +208,9 @@
           }
 
           btn.textContent = seconds > 0 ? "ABRIR TELEGRAM (" + seconds + ")" : "ABRIR TELEGRAM";
-          status.textContent = "CONFIRMANDO LOCALIZACAO... " + seconds + "s";
+          status.textContent = seconds > 0
+            ? "REDIRECIONANDO PARA O TELEGRAM EM " + seconds + "s"
+            : "REDIRECIONANDO...";
 
           if (seconds <= 0) {
             goTelegram();
@@ -257,31 +221,7 @@
           countdownTimer = setTimeout(tick, 1000);
         }
 
-        function startGeoCheck() {
-          if (!window.fetch) {
-            return;
-          }
-
-          if (window.AbortController) {
-            geoController = new AbortController();
-          }
-
-          fetchCountryCode(geoController ? geoController.signal : null)
-            .then(function (countryCode) {
-              if (finished) {
-                return;
-              }
-              if (countryCode && countryCode !== "BR") {
-                goFallback();
-              }
-            })
-            .catch(function () {
-              // Ignora erro/timeout de rede; countdown decide o redirecionamento final.
-            });
-        }
-
         tick();
-        startGeoCheck();
         btn.addEventListener("click", function () {
           goTelegram();
         });
