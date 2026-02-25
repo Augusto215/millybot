@@ -1,9 +1,9 @@
 services:
   app:
-    container_name: presellalice
+    container_name: presellmilly
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "4167:4167"
+      - "4567:4567"
     restart: unless-stopped
