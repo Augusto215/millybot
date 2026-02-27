@@ -136,7 +136,7 @@
         height: 24px;
         flex: 0 0 24px;
         border-radius: 100%;
-        background: linear-gradient(135deg, #97165f, #bb6696, #ff7ad1);
+        background: #ff4fb3;
         color: #fff;
         font-weight: 800;
         box-shadow: 0 8px 18px rgba(255, 79, 179, 0.35);
@@ -147,11 +147,7 @@
       }
 
       .pink-gradient-text {
-        background: linear-gradient(135deg, #ff4fb3, #ff7ad1, #ff9be0);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        color: transparent;
+        color: #ff4fb3;
         font-weight: 700;
       }
 
@@ -161,7 +157,7 @@
         padding: 14px 16px;
         border: none;
         border-radius: 12px;
-        background: linear-gradient(135deg, var(--pink-1), var(--pink-2));
+        background: #ff4fb3;
         color: #1a0b14;
         font-weight: 800;
         letter-spacing: 0.05em;
@@ -229,7 +225,7 @@
 
         <button style="color:#fff; font-size: 1rem; font-weight: 700;" class="btn" id="telegramBtn">
        </button>
-        <div style="  margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">Toque em "entendi" para abrir o Telegram.</div>
+        <div style="  margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">Toque em no botão para abrir o Telegram.</div>
         <div style=" font-size: .8rem;" class="hint"><span  style="margin-bottom: 18px; margin-right: 18px;" class="arrow"></span> Dica: use o navegador</div>
       </div>
     </div>
@@ -247,7 +243,7 @@
           if (finished) {
             return;
           }
-          btn.textContent = seconds > 0 ? "ENTENDI (" + seconds + ")" : "ENTENDI";
+          btn.textContent = seconds > 0 ? "ABRIR TELEGRAM (" + seconds + ")" : "ABRIR TELEGRAM";
         }
 
         function goTelegram() {
