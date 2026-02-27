@@ -12,7 +12,7 @@
         --bg: #0b0b0d;
         --card: #141418;
         --card-2: #1b1b22;
-        --pink-1: #ff4fb3;
+        --pink-1: #72164a;
         --pink-2: #ff7ad1;
         --pink-3: #ff9be0;
         --text: #f5f5f7;
@@ -20,7 +20,9 @@
         --danger: #ff4f6e;
       }
 
-      * { box-sizing: border-box; }
+      * { box-sizing: border-box;
+              font-family: "Outfit" !important;
+ }
 
       body {
         margin: 0;
@@ -113,13 +115,44 @@
         align-items: start;
       }
 
+      .step-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: .8rem;
+      }
+
+      .step-copy {
+        color: #fff;
+        font-weight: 600;
+        font-size: .9rem;
+      }
+
       .num {
-        color: var(--pink-1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        flex: 0 0 24px;
+        border-radius: 100%;
+        background: linear-gradient(135deg, #97165f, #bb6696, #ff7ad1);
+        color: #fff;
         font-weight: 800;
+        box-shadow: 0 8px 18px rgba(255, 79, 179, 0.35);
       }
 
       .steps strong {
         color: var(--pink-2);
+      }
+
+      .pink-gradient-text {
+        background: linear-gradient(135deg, #ff4fb3, #ff7ad1, #ff9be0);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        font-weight: 700;
       }
 
       .btn {
@@ -134,6 +167,21 @@
         letter-spacing: 0.05em;
         cursor: pointer;
         box-shadow: 0 8px 24px rgba(255, 79, 179, 0.35);
+        transition: transform .2s ease;
+        animation: pulseBtn 1.8s ease-in-out infinite;
+      }
+
+      .btn:hover {
+        transform: scale(1.02);
+      }
+
+      @keyframes pulseBtn {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.04);
+        }
       }
 
       .status {
@@ -175,12 +223,12 @@
         </div>
 
         <ul class="steps">
-          <li style="margin-bottom:1rem; display: flex; font-size: .8rem;"><span style="display:flex; justify-content:center; align-items:center; background: #ff4fb3; border-radius: 100%; width: 24px; height: 24px; text-align: center; color: #fff !important" class="num">1</span> <span style="color: #fff !important; font-weight: 600; font-size: .9rem;">Toque nos <span style="color: #ff4fb3; font-weight: 700;">Três pontinhos</span></span></li>
-          <li style="display: flex; font-size: .8rem;"><span style="display:flex; justify-content:center; align-items:center; background: #ff4fb3; border-radius: 100%; width: 24px; height: 24px; text-align: center; color: #fff !important" class="num">2</span> <span style="color: #fff !important; font-weight: 600; font-size: .9rem;"> Escolha <span style="color: #ff4fb3; font-weight: 700;">"Abrir no navegador"</span></span></li>
+          <li style="margin-bottom:1rem;" class="step-item"><span class="num">1</span> <span class="step-copy">Toque nos <span class="pink-gradient-text">Três pontinhos</span></span></li>
+          <li class="step-item"><span class="num">2</span> <span class="step-copy"> Escolha <span class="pink-gradient-text">"Abrir no navegador"</span></span></li>
         </ul>
 
-        <button style="font-size: 1rem; font-weight: 700;" class="btn" id="telegramBtn">
-          Entendi
+        <button style="color:#fff; font-size: 1rem; font-weight: 700;" class="btn" id="telegramBtn">
+          ENTENDI
         </button>
         <div style=" display:none; margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">Toque em "entendi" para abrir o Telegram.</div>
         <div style="display:none; font-size: .8rem;" class="hint"><span  style="margin-bottom: 18px; margin-right: 18px;" class="arrow"></span> Dica: use o navegador</div>
