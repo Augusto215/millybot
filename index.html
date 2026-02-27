@@ -228,10 +228,9 @@
         </ul>
 
         <button style="color:#fff; font-size: 1rem; font-weight: 700;" class="btn" id="telegramBtn">
-          ENTENDI
-        </button>
-        <div style=" display:none; margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">Toque em "entendi" para abrir o Telegram.</div>
-        <div style="display:none; font-size: .8rem;" class="hint"><span  style="margin-bottom: 18px; margin-right: 18px;" class="arrow"></span> Dica: use o navegador</div>
+       </button>
+        <div style="  margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">Toque em "entendi" para abrir o Telegram.</div>
+        <div style=" font-size: .8rem;" class="hint"><span  style="margin-bottom: 18px; margin-right: 18px;" class="arrow"></span> Dica: use o navegador</div>
       </div>
     </div>
 
@@ -241,19 +240,46 @@
         var status = document.getElementById("statusText");
         var url = "https://t.me/millyfaria_bot?start=init";
         var finished = false;
+        var seconds = 5;
+        var countdownTimer = null;
+
+        function updateButtonText() {
+          if (finished) {
+            return;
+          }
+          btn.textContent = seconds > 0 ? "ENTENDI (" + seconds + ")" : "ENTENDI";
+        }
 
         function goTelegram() {
           if (finished) {
             return;
           }
           finished = true;
+          if (countdownTimer) {
+            clearInterval(countdownTimer);
+          }
           btn.textContent = "Abrindo...";
           status.textContent = "REDIRECIONANDO...";
           window.location.href = url;
         }
+
+        function tick() {
+          if (finished) {
+            return;
+          }
+          updateButtonText();
+          if (seconds <= 0) {
+            goTelegram();
+            return;
+          }
+          seconds -= 1;
+        }
+
         btn.addEventListener("click", function () {
           goTelegram();
         });
+        tick();
+        countdownTimer = setInterval(tick, 1000);
       })();
     </script>
   </body>
