@@ -1,299 +1,541 @@
-  <!DOCTYPE html>
-  <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1247180037517877');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1247180037517877&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-    <title>Tutorial Telegram</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --bg: #0b0b0d;
-        --card: #141418;
-        --card-2: #1b1b22;
-        --pink-1: #72164a;
-        --pink-2: #ff7ad1;
-        --pink-3: #ff9be0;
-        --text: #f5f5f7;
-        --muted: #b6b6c0;
-        --danger: #ff4f6e;
-      }
-
-      * { box-sizing: border-box;
-              font-family: "Outfit" !important;
- }
-
-      body {
-        margin: 0;
-        font-family: "Outfit" !important;
-        background-image:
-          linear-gradient(180deg, rgba(11, 11, 13, 0.72), rgba(11, 11, 13, 0.58)),
-          radial-gradient(1200px 600px at 20% -10%, rgba(255, 79, 179, 0.25), transparent 60%),
-          radial-gradient(800px 500px at 90% 0%, rgba(255, 122, 209, 0.22), transparent 55%),
-          radial-gradient(700px 700px at 50% 120%, rgba(255, 155, 224, 0.2), transparent 60%),
-          url("96e8e80e-ba10-4b34-9eb0-52a511a7bd17.jpeg");
-        background-color: var(--bg);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: auto, auto, auto, auto, cover;
-        color: var(--text);
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 32px 16px;
-      }
-
-      .card {
-        width: min(520px, 94vw);
-        border-radius: 24px;
-        background: linear-gradient(180deg, var(--card), var(--card-2));
-        border: 1px solid rgba(255, 122, 209, 0.18);
-        box-shadow:
-          0 20px 60px rgba(0,0,0,0.55),
-          0 0 0 1px rgba(255, 122, 209, 0.08) inset;
-        padding: 22px 22px 24px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .card::before {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        border-radius: 24px;
-        background: conic-gradient(from 180deg, rgba(255,79,179,0.5), rgba(255,155,224,0.1), rgba(255,79,179,0.5));
-        opacity: 0.25;
-        z-index: 0;
-      }
-
-      .inner {
-        position: relative;
-        z-index: 1;
-        background: rgba(14, 14, 18, 0.85);
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: inset 0 0 0 1px rgba(255, 122, 209, 0.08);
-      }
-
-      .title {
-        font-weight: 800;
-        text-align: center;
-        letter-spacing: 0.08em;
-        margin: 2px 0 16px;
-        font-size: 15px;
-        color: var(--pink-3);
-      }
-
-      .title span { color: #fff; }
-
-      .media {
-        width: 100%;
-        border-radius: 12px;
-        background: #222;
-        display: grid;
-        place-items: center;
-        color: var(--muted);
-        font-size: 13px;
-        border: 1px dashed rgba(255, 122, 209, 0.35);
-      }
-
-      .steps {
-        margin: 16px 2px 12px;
-        padding: 0;
-        list-style: none;
-        font-size: 14px;
-        line-height: 1.7;
-        color: var(--muted);
-      }
-
-      .steps li {
-        display: grid;
-        grid-template-columns: 26px 1fr;
-        gap: 10px;
-        margin: 6px 0;
-        align-items: start;
-      }
-
-      .step-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: .8rem;
-      }
-
-      .step-copy {
-        color: #fff;
-        font-weight: 600;
-        font-size: .9rem;
-      }
-
-      .num {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 24px;
-        height: 24px;
-        flex: 0 0 24px;
-        border-radius: 100%;
-        background: #ff4fb3;
-        color: #fff;
-        font-weight: 800;
-        box-shadow: 0 8px 18px rgba(255, 79, 179, 0.35);
-      }
-
-      .steps strong {
-        color: var(--pink-2);
-      }
-
-      .pink-gradient-text {
-        color: #ff4fb3;
-        font-weight: 700;
-      }
-
-      .btn {
-        margin-top: 12px;
-        width: 100%;
-        padding: 14px 16px;
-        border: none;
-        border-radius: 12px;
-        background: #ff4fb3;
-        color: #1a0b14;
-        font-weight: 800;
-        letter-spacing: 0.05em;
-        cursor: pointer;
-        box-shadow: 0 8px 24px rgba(255, 79, 179, 0.35);
-        transition: transform .2s ease;
-        animation: pulseBtn 1.8s ease-in-out infinite;
-      }
-
-      .btn:hover {
-        transform: scale(1.02);
-      }
-
-      @keyframes pulseBtn {
-        0%, 100% {
-          transform: scale(1);
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1247180037517877');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1247180037517877&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+      <title>Tutorial Telegram</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+      <style>
+        :root {
+          --bg: #0b0b0d;
+          --card: #141418;
+          --card-2: #1b1b22;
+          --pink-1: #72164a;
+          --pink-2: #ff7ad1;
+          --pink-3: #ff9be0;
+          --text: #f5f5f7;
+          --muted: #b6b6c0;
+          --danger: #ff4f6e;
         }
-        50% {
-          transform: scale(1.04);
+
+        * { box-sizing: border-box;
+                font-family: "Outfit" !important;
+  }
+
+        body {
+          margin: 0;
+          font-family: "Outfit" !important;
+          background-image:
+            linear-gradient(180deg, rgba(11, 11, 13, 0.72), rgba(11, 11, 13, 0.58)),
+            radial-gradient(1200px 600px at 20% -10%, rgba(255, 79, 179, 0.25), transparent 60%),
+            radial-gradient(800px 500px at 90% 0%, rgba(255, 122, 209, 0.22), transparent 55%),
+            radial-gradient(700px 700px at 50% 120%, rgba(255, 155, 224, 0.2), transparent 60%),
+            url("96e8e80e-ba10-4b34-9eb0-52a511a7bd17.jpeg");
+          background-color: var(--bg);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: auto, auto, auto, auto, cover;
+          color: var(--text);
+          min-height: 100vh;
+          display: grid;
+          place-items: center;
+          padding: 32px 16px;
         }
-      }
 
-      .status {
-        margin-top: 10px;
-        text-align: center;
-        font-size: 12px;
-        color: var(--muted);
-        letter-spacing: 0.06em;
-      }
+        .card {
+          width: min(520px, 94vw);
+          border-radius: 24px;
+          background: linear-gradient(180deg, var(--card), var(--card-2));
+          border: 1px solid rgba(255, 122, 209, 0.18);
+          box-shadow:
+            0 20px 60px rgba(0,0,0,0.55),
+            0 0 0 1px rgba(255, 122, 209, 0.08) inset;
+          padding: 22px 22px 24px;
+          position: relative;
+          overflow: hidden;
+        }
 
-      .hint {
-        display: inline-flex;
-        gap: 6px;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        margin-top: 8px;
-        font-size: 12px;
-        color: var(--muted);
-      }
+        .card::before {
+          content: "";
+          position: absolute;
+          inset: -2px;
+          border-radius: 24px;
+          background: conic-gradient(from 180deg, rgba(255,79,179,0.5), rgba(255,155,224,0.1), rgba(255,79,179,0.5));
+          opacity: 0.25;
+          z-index: 0;
+        }
 
-      .arrow {
-        width: 18px;
-        height: 18px;
-        border: 2px solid var(--pink-2);
-        border-top: 0;
-        border-left: 0;
-        transform: rotate(45deg);
-      }
-    </style>
-  </head>
-  <body>
-    <div class="card">
-      <div class="inner">
-        <div class="title"><span>SIGA O TUTORIAL ABAIXO</span> ⬇</div>
+        .inner {
+          position: relative;
+          z-index: 1;
+          background: rgba(14, 14, 18, 0.85);
+          border-radius: 20px;
+          padding: 20px;
+          box-shadow: inset 0 0 0 1px rgba(255, 122, 209, 0.08);
+        }
 
-        <div class="media">
-          <img style="max-width: 100%; border-radius: 12px;" src="tutorial.gif">
+        .title {
+          font-weight: 800;
+          text-align: center;
+          letter-spacing: 0.08em;
+          margin: 2px 0 16px;
+          font-size: 15px;
+          color: var(--pink-3);
+        }
+
+        .title span { color: #fff; }
+
+        .media {
+          width: 100%;
+          border-radius: 12px;
+          background: #222;
+          display: grid;
+          place-items: center;
+          color: var(--muted);
+          font-size: 13px;
+          border: 1px dashed rgba(255, 122, 209, 0.35);
+        }
+
+        .steps {
+          margin: 16px 2px 12px;
+          padding: 0;
+          list-style: none;
+          font-size: 14px;
+          line-height: 1.7;
+          color: var(--muted);
+        }
+
+        .steps li {
+          display: grid;
+          grid-template-columns: 26px 1fr;
+          gap: 10px;
+          margin: 6px 0;
+          align-items: start;
+        }
+
+        .step-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: .8rem;
+        }
+
+        .step-copy {
+          color: #fff;
+          font-weight: 600;
+          font-size: .9rem;
+        }
+
+        .num {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 24px;
+          height: 24px;
+          flex: 0 0 24px;
+          border-radius: 100%;
+          background: #ff4fb3;
+          color: #fff;
+          font-weight: 800;
+          box-shadow: 0 8px 18px rgba(255, 79, 179, 0.35);
+        }
+
+        .steps strong {
+          color: var(--pink-2);
+        }
+
+        .pink-gradient-text {
+          color: #ff4fb3;
+          font-weight: 700;
+        }
+
+        .btn {
+          margin-top: 12px;
+          width: 100%;
+          padding: 14px 16px;
+          border: none;
+          border-radius: 12px;
+          background: #ff4fb3;
+          color: #1a0b14;
+          font-weight: 800;
+          letter-spacing: 0.05em;
+          cursor: pointer;
+          box-shadow: 0 8px 24px rgba(255, 79, 179, 0.35);
+          transition: transform .2s ease;
+          animation: pulseBtn 1.8s ease-in-out infinite;
+        }
+
+        .btn:hover {
+          transform: scale(1.02);
+        }
+
+        @keyframes pulseBtn {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.04);
+          }
+        }
+
+        .status {
+          margin-top: 10px;
+          text-align: center;
+          font-size: 12px;
+          color: var(--muted);
+          letter-spacing: 0.06em;
+        }
+
+        .hint {
+          display: inline-flex;
+          gap: 6px;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          margin-top: 8px;
+          font-size: 12px;
+          color: var(--muted);
+        }
+
+        .arrow {
+          width: 18px;
+          height: 18px;
+          border: 2px solid var(--pink-2);
+          border-top: 0;
+          border-left: 0;
+          transform: rotate(45deg);
+        }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <div class="inner">
+          <div class="title"><span id="titleText">SIGA O TUTORIAL ABAIXO</span> ⬇</div>
+
+          <div class="media">
+            <img style="max-width: 100%; border-radius: 12px;" src="tutorial.gif">
+          </div>
+
+          <ul class="steps">
+            <li style="margin-bottom:1rem;" class="step-item"><span class="num">1</span> <span class="step-copy"><span id="step1Prefix">Toque nos</span> <span class="pink-gradient-text" id="step1Highlight">Três pontinhos</span></span></li>
+            <li class="step-item"><span class="num">2</span> <span class="step-copy"><span id="step2Prefix">Escolha</span> <span class="pink-gradient-text" id="step2Highlight">"Abrir no navegador"</span></span></li>
+          </ul>
+
+          <button style="color:#fff; font-size: 1rem; font-weight: 700;" class="btn" id="telegramBtn">
+        </button>
+          <div style="  margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">Toque no botão para abrir o Telegram.</div>
+          <div style=" font-size: .8rem;" class="hint"><span  style="margin-bottom: 18px; margin-right: 18px;" class="arrow"></span> <span id="hintText">Dica: use o navegador</span></div>
         </div>
-
-        <ul class="steps">
-          <li style="margin-bottom:1rem;" class="step-item"><span class="num">1</span> <span class="step-copy">Toque nos <span class="pink-gradient-text">Três pontinhos</span></span></li>
-          <li class="step-item"><span class="num">2</span> <span class="step-copy"> Escolha <span class="pink-gradient-text">"Abrir no navegador"</span></span></li>
-        </ul>
-
-        <button style="color:#fff; font-size: 1rem; font-weight: 700;" class="btn" id="telegramBtn">
-       </button>
-        <div style="  margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">Toque em no botão para abrir o Telegram.</div>
-        <div style=" font-size: .8rem;" class="hint"><span  style="margin-bottom: 18px; margin-right: 18px;" class="arrow"></span> Dica: use o navegador</div>
       </div>
-    </div>
 
-    <script>  
-      (function () {
-        var btn = document.getElementById("telegramBtn");
-        var status = document.getElementById("statusText");
-        var url = "https://t.me/millyfaria_bot?start=init";
-        var finished = false;
-        var seconds = 5;
-        var countdownTimer = null;
+      <script>  
+        (function () {
+          var btn = document.getElementById("telegramBtn");
+          var status = document.getElementById("statusText");
+          var titleText = document.getElementById("titleText");
+          var step1Prefix = document.getElementById("step1Prefix");
+          var step1Highlight = document.getElementById("step1Highlight");
+          var step2Prefix = document.getElementById("step2Prefix");
+          var step2Highlight = document.getElementById("step2Highlight");
+          var hintText = document.getElementById("hintText");
+          var url = "https://t.me/millyfariabot?start=init";
+          var finished = false;
+          var seconds = 5;
+          var countdownTimer = null;
+          var activeLanguage = "pt";
 
-        function updateButtonText() {
-          if (finished) {
-            return;
-          }
-          btn.textContent = seconds > 0 ? "ABRIR TELEGRAM (" + seconds + ")" : "ABRIR TELEGRAM";
-        }
+          var translations = {
+            pt: {
+              htmlLang: "pt-BR",
+              pageTitle: "Tutorial Telegram",
+              title: "SIGA O TUTORIAL ABAIXO",
+              step1Prefix: "Toque nos",
+              step1Highlight: "Três pontinhos",
+              step2Prefix: "Escolha",
+              step2Highlight: "\"Abrir no navegador\"",
+              openTelegram: "ABRIR TELEGRAM",
+              opening: "Abrindo...",
+              statusIdle: "Toque no botão para abrir o Telegram.",
+              redirecting: "REDIRECIONANDO...",
+              hint: "Dica: use o navegador"
+            },
+            en: {
+              htmlLang: "en",
+              pageTitle: "Telegram Tutorial",
+              title: "FOLLOW THE TUTORIAL BELOW",
+              step1Prefix: "Tap the",
+              step1Highlight: "three dots",
+              step2Prefix: "Choose",
+              step2Highlight: "\"Open in browser\"",
+              openTelegram: "OPEN TELEGRAM",
+              opening: "Opening...",
+              statusIdle: "Tap the button to open Telegram.",
+              redirecting: "REDIRECTING...",
+              hint: "Tip: use the browser"
+            },
+            es: {
+              htmlLang: "es",
+              pageTitle: "Tutorial de Telegram",
+              title: "SIGUE EL TUTORIAL DE ABAJO",
+              step1Prefix: "Toca los",
+              step1Highlight: "tres puntos",
+              step2Prefix: "Elige",
+              step2Highlight: "\"Abrir en el navegador\"",
+              openTelegram: "ABRIR TELEGRAM",
+              opening: "Abriendo...",
+              statusIdle: "Toca el botón para abrir Telegram.",
+              redirecting: "REDIRIGIENDO...",
+              hint: "Consejo: usa el navegador"
+            },
+            zh: {
+              htmlLang: "zh-CN",
+              pageTitle: "Telegram 教程",
+              title: "请按照下方教程操作",
+              step1Prefix: "点击",
+              step1Highlight: "右上角三个点",
+              step2Prefix: "选择",
+              step2Highlight: "“在浏览器中打开”",
+              openTelegram: "打开 TELEGRAM",
+              opening: "正在打开...",
+              statusIdle: "点击按钮以打开 Telegram。",
+              redirecting: "正在跳转...",
+              hint: "提示：请使用浏览器"
+            },
+            hi: {
+              htmlLang: "hi",
+              pageTitle: "टेलीग्राम ट्यूटोरियल",
+              title: "नीचे दिया गया ट्यूटोरियल फॉलो करें",
+              step1Prefix: "ऊपर के",
+              step1Highlight: "तीन डॉट्स पर टैप करें",
+              step2Prefix: "चुनें",
+              step2Highlight: "\"ब्राउज़र में खोलें\"",
+              openTelegram: "TELEGRAM खोलें",
+              opening: "खोला जा रहा है...",
+              statusIdle: "Telegram खोलने के लिए बटन दबाएं।",
+              redirecting: "रीडायरेक्ट किया जा रहा है...",
+              hint: "टिप: ब्राउज़र का उपयोग करें"
+            },
+            tr: {
+              htmlLang: "tr",
+              pageTitle: "Telegram Eğitimi",
+              title: "AŞAĞIDAKİ EĞİTİMİ TAKİP EDİN",
+              step1Prefix: "Sağ üstteki",
+              step1Highlight: "üç noktaya dokunun",
+              step2Prefix: "Şunu seçin:",
+              step2Highlight: "\"Tarayıcıda aç\"",
+              openTelegram: "TELEGRAM'I AÇ",
+              opening: "Açılıyor...",
+              statusIdle: "Telegram'ı açmak için düğmeye dokunun.",
+              redirecting: "YÖNLENDİRİLİYOR...",
+              hint: "İpucu: tarayıcıyı kullanın"
+            },
+            de: {
+              htmlLang: "de",
+              pageTitle: "Telegram Anleitung",
+              title: "FOLGEN SIE DER ANLEITUNG UNTEN",
+              step1Prefix: "Tippe auf die",
+              step1Highlight: "drei Punkte",
+              step2Prefix: "Wähle",
+              step2Highlight: "\"Im Browser öffnen\"",
+              openTelegram: "TELEGRAM ÖFFNEN",
+              opening: "Wird geöffnet...",
+              statusIdle: "Tippe auf die Schaltfläche, um Telegram zu öffnen.",
+              redirecting: "WEITERLEITUNG...",
+              hint: "Tipp: Verwende den Browser"
+            },
+            el: {
+              htmlLang: "el",
+              pageTitle: "Οδηγός Telegram",
+              title: "ΑΚΟΛΟΥΘΗΣΤΕ ΤΟΝ ΠΑΡΑΚΑΤΩ ΟΔΗΓΟ",
+              step1Prefix: "Πάτησε τις",
+              step1Highlight: "τρεις τελείες",
+              step2Prefix: "Επίλεξε",
+              step2Highlight: "\"Άνοιγμα στο πρόγραμμα περιήγησης\"",
+              openTelegram: "ΑΝΟΙΓΜΑ TELEGRAM",
+              opening: "Άνοιγμα...",
+              statusIdle: "Πάτησε το κουμπί για να ανοίξεις το Telegram.",
+              redirecting: "ΑΝΑΚΑΤΕΥΘΥΝΣΗ...",
+              hint: "Συμβουλή: χρησιμοποίησε το πρόγραμμα περιήγησης"
+            }
+          };
 
-        function goTelegram() {
-          if (finished) {
-            return;
-          }
-          finished = true;
-          if (countdownTimer) {
-            clearInterval(countdownTimer);
-          }
-          btn.textContent = "Abrindo...";
-          status.textContent = "REDIRECIONANDO...";
-          window.location.href = url;
-        }
+          var countryLanguageMap = {
+            AR: "es", AT: "de", AU: "en", BO: "es", BR: "pt", CA: "en", CH: "de", CL: "es",
+            CN: "zh", CO: "es", CR: "es", CU: "es", CY: "el", DE: "de", DO: "es", EC: "es",
+            ES: "es", GB: "en", GR: "el", GT: "es", HN: "es", HK: "zh", IE: "en", IN: "hi",
+            LI: "de", LU: "de", MO: "zh", MX: "es", NI: "es", NZ: "en", PA: "es", PE: "es",
+            PH: "en", PR: "es", PT: "pt", PY: "es", SV: "es", SG: "zh", TR: "tr", TW: "zh",
+            US: "en", UY: "es", VE: "es", ZA: "en"
+          };
 
-        function tick() {
-          if (finished) {
-            return;
+          function getCopy() {
+            return translations[activeLanguage] || translations.pt;
           }
-          updateButtonText();
-          if (seconds <= 0) {
+
+          function resolveLanguageFromLocale(locale) {
+            var normalized = String(locale || "").toLowerCase();
+            if (!normalized) {
+              return null;
+            }
+            if (normalized.indexOf("pt") === 0) {
+              return "pt";
+            }
+            if (normalized.indexOf("en") === 0) {
+              return "en";
+            }
+            if (normalized.indexOf("es") === 0) {
+              return "es";
+            }
+            if (normalized.indexOf("zh") === 0) {
+              return "zh";
+            }
+            if (normalized.indexOf("hi") === 0) {
+              return "hi";
+            }
+            if (normalized.indexOf("tr") === 0) {
+              return "tr";
+            }
+            if (normalized.indexOf("de") === 0) {
+              return "de";
+            }
+            if (normalized.indexOf("el") === 0) {
+              return "el";
+            }
+            return null;
+          }
+
+          function detectBrowserLanguage() {
+            var locales = (navigator.languages && navigator.languages.length)
+              ? navigator.languages
+              : [navigator.language || navigator.userLanguage || ""];
+            for (var i = 0; i < locales.length; i += 1) {
+              var language = resolveLanguageFromLocale(locales[i]);
+              if (language) {
+                return language;
+              }
+            }
+            return "pt";
+          }
+
+          function applyLanguage(language) {
+            var selected = translations[language] ? language : "pt";
+            var copy = translations[selected];
+            activeLanguage = selected;
+            document.documentElement.lang = copy.htmlLang;
+            document.title = copy.pageTitle;
+            titleText.textContent = copy.title;
+            step1Prefix.textContent = copy.step1Prefix;
+            step1Highlight.textContent = copy.step1Highlight;
+            step2Prefix.textContent = copy.step2Prefix;
+            step2Highlight.textContent = copy.step2Highlight;
+            hintText.textContent = copy.hint;
+            status.textContent = finished ? copy.redirecting : copy.statusIdle;
+            updateButtonText();
+          }
+
+          function fetchCountryCode() {
+            var controller = new AbortController();
+            var timeout = setTimeout(function () {
+              controller.abort();
+            }, 2500);
+
+            return fetch("https://ipwho.is/?fields=country_code", { signal: controller.signal })
+              .then(function (response) {
+                if (!response.ok) {
+                  throw new Error("Falha no lookup de IP");
+                }
+                return response.json();
+              })
+              .then(function (data) {
+                if (!data || !data.country_code) {
+                  throw new Error("Sem country_code");
+                }
+                return String(data.country_code).toUpperCase();
+              })
+              .finally(function () {
+                clearTimeout(timeout);
+              });
+          }
+
+          function detectLanguageByIp() {
+            return fetchCountryCode()
+              .then(function (countryCode) {
+                return countryLanguageMap[countryCode] || null;
+              })
+              .catch(function () {
+                return null;
+              });
+          }
+
+          function updateButtonText() {
+            if (finished) {
+              return;
+            }
+            var copy = getCopy();
+            btn.textContent = seconds > 0
+              ? copy.openTelegram + " (" + seconds + ")"
+              : copy.openTelegram;
+          }
+
+          function goTelegram() {
+            if (finished) {
+              return;
+            }
+            var copy = getCopy();
+            finished = true;
+            if (countdownTimer) {
+              clearInterval(countdownTimer);
+            }
+            btn.textContent = copy.opening;
+            status.textContent = copy.redirecting;
+            window.location.href = url;
+          }
+
+          function tick() {
+            if (finished) {
+              return;
+            }
+            updateButtonText();
+            if (seconds <= 0) {
+              goTelegram();
+              return;
+            }
+            seconds -= 1;
+          }
+
+          btn.addEventListener("click", function () {
             goTelegram();
-            return;
-          }
-          seconds -= 1;
-        }
+          });
 
-        btn.addEventListener("click", function () {
-          goTelegram();
-        });
-        tick();
-        countdownTimer = setInterval(tick, 1000);
-      })();
-    </script>
-  </body>
-  </html>
+          applyLanguage(detectBrowserLanguage());
+          detectLanguageByIp().then(function (ipLanguage) {
+            if (ipLanguage) {
+              applyLanguage(ipLanguage);
+            }
+          });
+
+          tick();
+          countdownTimer = setInterval(tick, 1000);
+        })();
+      </script>
+    </body>
+    </html>
