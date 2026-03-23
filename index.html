@@ -257,7 +257,9 @@
           var step2Prefix = document.getElementById("step2Prefix");
           var step2Highlight = document.getElementById("step2Highlight");
           var hintText = document.getElementById("hintText");
-          var url = "https://t.me/millyfariabot?start=init";
+          var defaultTelegramUrl = "https://t.me/millyfariabot?start=init";
+          var brTelegramUrl = "https://t.me/millyfaria_bot?start=init";
+          var url = defaultTelegramUrl;
           var finished = false;
           var seconds = 5;
           var countdownTimer = null;
@@ -452,37 +454,154 @@
             updateButtonText();
           }
 
-          function fetchCountryCode() {
+          function normalizeCountryCode(countryCode) {
+            var normalized = String(countryCode || "").trim().toUpperCase();
+            if (!/^[A-Z]{2}$/.test(normalized)) {
+              throw new Error("Country code invalido");
+            }
+            return normalized;
+          }
+
+          function fetchJsonWithTimeout(requestUrl, timeoutMs) {
             var controller = new AbortController();
             var timeout = setTimeout(function () {
               controller.abort();
-            }, 2500);
+            }, timeoutMs);
 
-            return fetch("https://ipwho.is/?fields=country_code", { signal: controller.signal })
+            return fetch(requestUrl, { signal: controller.signal })
               .then(function (response) {
                 if (!response.ok) {
                   throw new Error("Falha no lookup de IP");
                 }
                 return response.json();
               })
-              .then(function (data) {
-                if (!data || !data.country_code) {
-                  throw new Error("Sem country_code");
+              .finally(function () {
+                clearTimeout(timeout);
+              });
+          }
+
+          function fetchTextWithTimeout(requestUrl, timeoutMs) {
+            var controller = new AbortController();
+            var timeout = setTimeout(function () {
+              controller.abort();
+            }, timeoutMs);
+
+            return fetch(requestUrl, { signal: controller.signal })
+              .then(function (response) {
+                if (!response.ok) {
+                  throw new Error("Falha no lookup de IP");
                 }
-                return String(data.country_code).toUpperCase();
+                return response.text();
               })
               .finally(function () {
                 clearTimeout(timeout);
               });
           }
 
-          function detectLanguageByIp() {
-            return fetchCountryCode()
-              .then(function (countryCode) {
-                return countryLanguageMap[countryCode] || null;
+          function fetchCountryCode() {
+            return fetchJsonWithTimeout("https://ipwho.is/?fields=country_code", 2500)
+              .then(function (data) {
+                return normalizeCountryCode(data && data.country_code);
               })
               .catch(function () {
-                return null;
+                return fetchJsonWithTimeout("https://ipapi.co/json/", 2500)
+                  .then(function (data) {
+                    return normalizeCountryCode(data && data.country_code);
+                  });
+              })
+              .catch(function () {
+                return fetchTextWithTimeout("https://ipapi.co/country/", 2500)
+                  .then(function (text) {
+                    return normalizeCountryCode(text);
+                  });
+              });
+          }
+
+          function resolveCountryCodeFromLocale(locale) {
+            var normalized = String(locale || "").trim().replace(/_/g, "-");
+            if (!normalized) {
+              return null;
+            }
+            var parts = normalized.split("-");
+            if (parts.length < 2) {
+              return null;
+            }
+            var countryCode = String(parts[parts.length - 1] || "").toUpperCase();
+            if (!/^[A-Z]{2}$/.test(countryCode)) {
+              return null;
+            }
+            return countryCode;
+          }
+
+          function detectBrowserCountryCode() {
+            var locales = (navigator.languages && navigator.languages.length)
+              ? navigator.languages
+              : [navigator.language || navigator.userLanguage || ""];
+            for (var i = 0; i < locales.length; i += 1) {
+              var countryCode = resolveCountryCodeFromLocale(locales[i]);
+              if (countryCode) {
+                return countryCode;
+              }
+            }
+            return null;
+          }
+
+          function detectBrazilByTimeZone() {
+            var timeZone = "";
+            try {
+              timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+            } catch (error) {
+              return false;
+            }
+            var brazilTimeZones = {
+              "America/Araguaina": true,
+              "America/Bahia": true,
+              "America/Belem": true,
+              "America/Boa_Vista": true,
+              "America/Campo_Grande": true,
+              "America/Cuiaba": true,
+              "America/Fortaleza": true,
+              "America/Maceio": true,
+              "America/Manaus": true,
+              "America/Noronha": true,
+              "America/Porto_Velho": true,
+              "America/Recife": true,
+              "America/Rio_Branco": true,
+              "America/Santarem": true,
+              "America/Sao_Paulo": true
+            };
+            return !!brazilTimeZones[timeZone];
+          }
+
+          function detectBrowserCountryFallback() {
+            var browserCountryCode = detectBrowserCountryCode();
+            if (browserCountryCode) {
+              return browserCountryCode;
+            }
+            return detectBrazilByTimeZone() ? "BR" : null;
+          }
+
+          function resolveTelegramUrlByCountryCode(countryCode) {
+            return countryCode === "BR" ? brTelegramUrl : defaultTelegramUrl;
+          }
+
+          function detectIpContext() {
+            return fetchCountryCode()
+              .then(function (countryCode) {
+                return {
+                  language: countryLanguageMap[countryCode] || null,
+                  telegramUrl: resolveTelegramUrlByCountryCode(countryCode)
+                };
+              })
+              .catch(function () {
+                var fallbackCountryCode = detectBrowserCountryFallback();
+                if (!fallbackCountryCode) {
+                  return null;
+                }
+                return {
+                  language: countryLanguageMap[fallbackCountryCode] || null,
+                  telegramUrl: resolveTelegramUrlByCountryCode(fallbackCountryCode)
+                };
               });
           }
 
@@ -526,10 +645,19 @@
             goTelegram();
           });
 
+          var browserCountryFallback = detectBrowserCountryFallback();
+          if (browserCountryFallback) {
+            url = resolveTelegramUrlByCountryCode(browserCountryFallback);
+          }
+
           applyLanguage(detectBrowserLanguage());
-          detectLanguageByIp().then(function (ipLanguage) {
-            if (ipLanguage) {
-              applyLanguage(ipLanguage);
+          detectIpContext().then(function (ipContext) {
+            if (!ipContext) {
+              return;
+            }
+            url = ipContext.telegramUrl;
+            if (ipContext.language) {
+              applyLanguage(ipContext.language);
             }
           });
 
