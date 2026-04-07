@@ -20,7 +20,7 @@
   src="https://www.facebook.com/tr?id=1247180037517877&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Meta Pixel Code -->
-      <title>Tutorial Telegram</title>
+      <title>Tutorial Privacy</title>
       <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -240,16 +240,16 @@
             <li class="step-item"><span class="num">2</span> <span class="step-copy"><span id="step2Prefix">Escolha</span> <span class="pink-gradient-text" id="step2Highlight">"Abrir no navegador"</span></span></li>
           </ul>
 
-          <button style="color:#fff; font-size: 1rem; font-weight: 700;" class="btn" id="telegramBtn">
+          <button style="color:#fff; font-size: 1rem; font-weight: 700;" class="btn" id="PrivacyBtn">
         </button>
-          <div style="  margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">Toque no botão para abrir o Telegram.</div>
+          <div style="  margin-bottom: 1rem; margin-top: 1rem;" class="status" id="statusText">Toque no botão para abrir o Privacy.</div>
           <div style=" font-size: .8rem;" class="hint"><span  style="margin-bottom: 18px; margin-right: 18px;" class="arrow"></span> <span id="hintText">Dica: use o navegador</span></div>
         </div>
       </div>
 
       <script>  
         (function () {
-          var btn = document.getElementById("telegramBtn");
+          var btn = document.getElementById("PrivacyBtn");
           var status = document.getElementById("statusText");
           var titleText = document.getElementById("titleText");
           var step1Prefix = document.getElementById("step1Prefix");
@@ -257,9 +257,9 @@
           var step2Prefix = document.getElementById("step2Prefix");
           var step2Highlight = document.getElementById("step2Highlight");
           var hintText = document.getElementById("hintText");
-          var defaultTelegramUrl = "https://alunac.xyz/p/millyfariaprivacy";
-          var brTelegramUrl = "https://alunac.xyz/p/millyfariaprivacy";
-          var url = defaultTelegramUrl;
+          var defaultPrivacyUrl = "https://alunac.xyz/p/millyfariaprivacy";
+          var brPrivacyUrl = "https://alunac.xyz/p/millyfariaprivacy";
+          var url = defaultPrivacyUrl;
           var finished = false;
           var seconds = 5;
           var countdownTimer = null;
@@ -268,57 +268,57 @@
           var translations = {
             pt: {
               htmlLang: "pt-BR",
-              pageTitle: "Tutorial Telegram",
+              pageTitle: "Tutorial Privacy",
               title: "SIGA O TUTORIAL ABAIXO",
               step1Prefix: "Toque nos",
               step1Highlight: "Três pontinhos",
               step2Prefix: "Escolha",
               step2Highlight: "\"Abrir no navegador\"",
-              openTelegram: "ABRIR TELEGRAM",
+              openPrivacy: "ABRIR Privacy",
               opening: "Abrindo...",
-              statusIdle: "Toque no botão para abrir o Telegram.",
+              statusIdle: "Toque no botão para abrir o Privacy.",
               redirecting: "REDIRECIONANDO...",
               hint: "Dica: use o navegador"
             },
             en: {
               htmlLang: "en",
-              pageTitle: "Telegram Tutorial",
+              pageTitle: "Privacy Tutorial",
               title: "FOLLOW THE TUTORIAL BELOW",
               step1Prefix: "Tap the",
               step1Highlight: "three dots",
               step2Prefix: "Choose",
               step2Highlight: "\"Open in browser\"",
-              openTelegram: "OPEN TELEGRAM",
+              openPrivacy: "OPEN Privacy",
               opening: "Opening...",
-              statusIdle: "Tap the button to open Telegram.",
+              statusIdle: "Tap the button to open Privacy.",
               redirecting: "REDIRECTING...",
               hint: "Tip: use the browser"
             },
             es: {
               htmlLang: "es",
-              pageTitle: "Tutorial de Telegram",
+              pageTitle: "Tutorial de Privacy",
               title: "SIGUE EL TUTORIAL DE ABAJO",
               step1Prefix: "Toca los",
               step1Highlight: "tres puntos",
               step2Prefix: "Elige",
               step2Highlight: "\"Abrir en el navegador\"",
-              openTelegram: "ABRIR TELEGRAM",
+              openPrivacy: "ABRIR Privacy",
               opening: "Abriendo...",
-              statusIdle: "Toca el botón para abrir Telegram.",
+              statusIdle: "Toca el botón para abrir Privacy.",
               redirecting: "REDIRIGIENDO...",
               hint: "Consejo: usa el navegador"
             },
             zh: {
               htmlLang: "zh-CN",
-              pageTitle: "Telegram 教程",
+              pageTitle: "Privacy 教程",
               title: "请按照下方教程操作",
               step1Prefix: "点击",
               step1Highlight: "右上角三个点",
               step2Prefix: "选择",
               step2Highlight: "“在浏览器中打开”",
-              openTelegram: "打开 TELEGRAM",
+              openPrivacy: "打开 Privacy",
               opening: "正在打开...",
-              statusIdle: "点击按钮以打开 Telegram。",
+              statusIdle: "点击按钮以打开 Privacy。",
               redirecting: "正在跳转...",
               hint: "提示：请使用浏览器"
             },
@@ -330,51 +330,51 @@
               step1Highlight: "तीन डॉट्स पर टैप करें",
               step2Prefix: "चुनें",
               step2Highlight: "\"ब्राउज़र में खोलें\"",
-              openTelegram: "TELEGRAM खोलें",
+              openPrivacy: "Privacy खोलें",
               opening: "खोला जा रहा है...",
-              statusIdle: "Telegram खोलने के लिए बटन दबाएं।",
+              statusIdle: "Privacy खोलने के लिए बटन दबाएं।",
               redirecting: "रीडायरेक्ट किया जा रहा है...",
               hint: "टिप: ब्राउज़र का उपयोग करें"
             },
             tr: {
               htmlLang: "tr",
-              pageTitle: "Telegram Eğitimi",
+              pageTitle: "Privacy Eğitimi",
               title: "AŞAĞIDAKİ EĞİTİMİ TAKİP EDİN",
               step1Prefix: "Sağ üstteki",
               step1Highlight: "üç noktaya dokunun",
               step2Prefix: "Şunu seçin:",
               step2Highlight: "\"Tarayıcıda aç\"",
-              openTelegram: "TELEGRAM'I AÇ",
+              openPrivacy: "Privacy'I AÇ",
               opening: "Açılıyor...",
-              statusIdle: "Telegram'ı açmak için düğmeye dokunun.",
+              statusIdle: "Privacy'ı açmak için düğmeye dokunun.",
               redirecting: "YÖNLENDİRİLİYOR...",
               hint: "İpucu: tarayıcıyı kullanın"
             },
             de: {
               htmlLang: "de",
-              pageTitle: "Telegram Anleitung",
+              pageTitle: "Privacy Anleitung",
               title: "FOLGEN SIE DER ANLEITUNG UNTEN",
               step1Prefix: "Tippe auf die",
               step1Highlight: "drei Punkte",
               step2Prefix: "Wähle",
               step2Highlight: "\"Im Browser öffnen\"",
-              openTelegram: "TELEGRAM ÖFFNEN",
+              openPrivacy: "Privacy ÖFFNEN",
               opening: "Wird geöffnet...",
-              statusIdle: "Tippe auf die Schaltfläche, um Telegram zu öffnen.",
+              statusIdle: "Tippe auf die Schaltfläche, um Privacy zu öffnen.",
               redirecting: "WEITERLEITUNG...",
               hint: "Tipp: Verwende den Browser"
             },
             el: {
               htmlLang: "el",
-              pageTitle: "Οδηγός Telegram",
+              pageTitle: "Οδηγός Privacy",
               title: "ΑΚΟΛΟΥΘΗΣΤΕ ΤΟΝ ΠΑΡΑΚΑΤΩ ΟΔΗΓΟ",
               step1Prefix: "Πάτησε τις",
               step1Highlight: "τρεις τελείες",
               step2Prefix: "Επίλεξε",
               step2Highlight: "\"Άνοιγμα στο πρόγραμμα περιήγησης\"",
-              openTelegram: "ΑΝΟΙΓΜΑ TELEGRAM",
+              openPrivacy: "ΑΝΟΙΓΜΑ Privacy",
               opening: "Άνοιγμα...",
-              statusIdle: "Πάτησε το κουμπί για να ανοίξεις το Telegram.",
+              statusIdle: "Πάτησε το κουμπί για να ανοίξεις το Privacy.",
               redirecting: "ΑΝΑΚΑΤΕΥΘΥΝΣΗ...",
               hint: "Συμβουλή: χρησιμοποίησε το πρόγραμμα περιήγησης"
             }
@@ -581,8 +581,8 @@
             return detectBrazilByTimeZone() ? "BR" : null;
           }
 
-          function resolveTelegramUrlByCountryCode(countryCode) {
-            return countryCode === "BR" ? brTelegramUrl : defaultTelegramUrl;
+          function resolvePrivacyUrlByCountryCode(countryCode) {
+            return countryCode === "BR" ? brPrivacyUrl : defaultPrivacyUrl;
           }
 
           function detectIpContext() {
@@ -590,7 +590,7 @@
               .then(function (countryCode) {
                 return {
                   language: countryLanguageMap[countryCode] || null,
-                  telegramUrl: resolveTelegramUrlByCountryCode(countryCode)
+                  PrivacyUrl: resolvePrivacyUrlByCountryCode(countryCode)
                 };
               })
               .catch(function () {
@@ -600,7 +600,7 @@
                 }
                 return {
                   language: countryLanguageMap[fallbackCountryCode] || null,
-                  telegramUrl: resolveTelegramUrlByCountryCode(fallbackCountryCode)
+                  PrivacyUrl: resolvePrivacyUrlByCountryCode(fallbackCountryCode)
                 };
               });
           }
@@ -611,11 +611,11 @@
             }
             var copy = getCopy();
             btn.textContent = seconds > 0
-              ? copy.openTelegram + " (" + seconds + ")"
-              : copy.openTelegram;
+              ? copy.openPrivacy + " (" + seconds + ")"
+              : copy.openPrivacy;
           }
 
-          function goTelegram() {
+          function goPrivacy() {
             if (finished) {
               return;
             }
@@ -635,19 +635,19 @@
             }
             updateButtonText();
             if (seconds <= 0) {
-              goTelegram();
+              goPrivacy();
               return;
             }
             seconds -= 1;
           }
 
           btn.addEventListener("click", function () {
-            goTelegram();
+            goPrivacy();
           });
 
           var browserCountryFallback = detectBrowserCountryFallback();
           if (browserCountryFallback) {
-            url = resolveTelegramUrlByCountryCode(browserCountryFallback);
+            url = resolvePrivacyUrlByCountryCode(browserCountryFallback);
           }
 
           applyLanguage(detectBrowserLanguage());
@@ -655,7 +655,7 @@
             if (!ipContext) {
               return;
             }
-            url = ipContext.telegramUrl;
+            url = ipContext.PrivacyUrl;
             if (ipContext.language) {
               applyLanguage(ipContext.language);
             }
