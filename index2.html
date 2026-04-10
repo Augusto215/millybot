@@ -1,259 +1,558 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Meu Segredo</title>
+  <title>Milly Faria — OnlyFans</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
-/* Troca a bolha por uma imagem sua */
-.woot-widget-bubble {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* coloca seu ícone */
-.woot-widget-bubble::before {
-  content: "";
-  width: 64px;
-  height: 64px;
-  display: block;
-  border-radius: 999px;
-  background: url("photo_4915878464901024825_y.jpg") center/cover no-repeat;
-}
-
-/* remove o ícone svg original (se existir) */
-.woot-widget-bubble svg,
-.woot-widget-bubble img {
-  display: none !important;
-}
-</style>
-<style>
-    :root {
-      --pink-1: #ffe6f0;
-      --pink-2: #ffd1e3;
-      --pink-3: #ffb6d5;
-      --rose: #ff6fa8;
-      --wine: #7a1c4a;
-      --white: #ffffff;
-    }
-
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f5f5;
+      color: #000;
       min-height: 100vh;
-      display: grid;
-      place-items: center;
-      font-family: "Cormorant Garamond", "Didot", "Bodoni MT", "Georgia", serif;
-      color: var(--wine);
-      background-image: url('photo_4915878464901024825_y.jpg'), linear-gradient(135deg, var(--pink-1), var(--pink-2), var(--pink-3));
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ── Main feed ── */
+    .main {
+      flex: 1;
+      min-width: 0;
+      border-right: 1px solid #e6e6e6;
+      background: #fff;
+    }
+
+    /* Banner */
+    .banner {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #ffb6d5, #ffd1e3);
+      position: relative;
       overflow: hidden;
     }
-
-
-    #neon {
-      position: fixed;
-      inset: -10vh -10vw;
-      width: 120vw;
-      height: 120vh;
-      z-index: 0;
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
 
-    .bg-shape {
-        display: none !important;
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      filter: blur(30px);
-      opacity: 0.45;
-    }
-
-    .shape-1 {
-      background: #ffd5e8;
-      top: -120px;
-      left: -80px;
-    }
-
-    .shape-2 {
-      background: #ffc1dd;
-      bottom: -140px;
-      right: -60px;
-    }
-
-    .cta {
+    /* Profile header */
+    .profile-header {
+      padding: 0 20px 16px;
       position: relative;
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 22px 48px;
-      background: linear-gradient(135deg, #ff4f9a, #ff1f7a);
-      color: var(--white);
-      font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
-      font-size: clamp(18px, 3.6vw, 24px);
+      border-bottom: 1px solid #e6e6e6;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-top: -52px;
+    }
+
+    .avatar {
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      object-fit: cover;
+      display: block;
+      background: #ffd1e3;
+    }
+
+    .profile-top-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding-top: 10px;
+    }
+
+    .profile-name {
+      font-size: 20px;
       font-weight: 700;
-      letter-spacing: 0.3px;
-      border-radius: 999px;
-      border: 2px solid rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .verify-badge {
+      color: #00aff0;
+      display: inline-flex;
+    }
+    .verify-badge svg { width: 20px; height: 20px; }
+
+    .profile-handle {
+      font-size: 14px;
+      color: #8a8a8a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .bio {
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #222;
+    }
+
+    .bio-link {
+      color: #00aff0;
       text-decoration: none;
-      box-shadow:
-        0 18px 40px rgba(255, 31, 122, 0.45),
-        0 0 0 6px rgba(255, 255, 255, 0.35);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      animation: pulse 2.2s ease-in-out infinite;
     }
 
-    .cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 34px rgba(255, 95, 158, 0.45);
+    .stats-row {
+      display: flex;
+      gap: 20px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #555;
+      flex-wrap: wrap;
+    }
+    .stats-row strong { color: #000; font-weight: 600; }
+
+    /* Subscription block */
+    .sub-block {
+      padding: 16px 20px;
+      border-bottom: 1px solid #e6e6e6;
     }
 
-    .cta:active {
-      transform: translateY(0);
+    .sub-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #8a8a8a;
+      margin-bottom: 10px;
     }
 
-    .plane {
-      width: 22px;
-      height: 22px;
+    .sub-offer-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 12px;
     }
 
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow:
-          0 18px 40px rgba(255, 31, 122, 0.45),
-          0 0 0 6px rgba(255, 255, 255, 0.35);
-      }
-      50% {
-        transform: scale(1.06);
-        box-shadow:
-          0 24px 54px rgba(255, 31, 122, 0.65),
-          0 0 0 10px rgba(255, 255, 255, 0.45);
-      }
+    .sub-message {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 14px;
     }
-    #give-freely-root-ejkiikneibegknkgimmihdpcbcedgmpo
-    {
-        display: none !important;
+
+    .sub-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #ffd1e3;
     }
+
+    .sub-msg-text {
+      font-size: 13px;
+      color: #333;
+      line-height: 1.45;
+    }
+
+    .assinar-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 14px 20px;
+      background: #00aff0;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .assinar-btn:hover { background: #0099d4; }
+
+    .normal-price {
+      font-size: 13px;
+      color: #8a8a8a;
+      margin-top: 8px;
+    }
+
+    /* Packages block */
+    .pkg-block {
+      padding: 16px 20px;
+      border-bottom: 1px solid #e6e6e6;
+    }
+
+    .pkg-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #000;
+    }
+    .pkg-header svg { width: 20px; height: 20px; color: #555; }
+
+    .pkg-option {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: #00aff0;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .pkg-option:hover { background: #0099d4; }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #e6e6e6;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 14px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      color: #8a8a8a;
+      border-bottom: 2px solid transparent;
+      text-transform: uppercase;
+    }
+    .tab.active {
+      color: #000;
+      border-bottom-color: #000;
+    }
+
+    /* Locked content grid */
+    .locked-area {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .locked-thumb {
+      aspect-ratio: 1;
+      background: #e6e6e6;
+      position: relative;
+      overflow: hidden;
+    }
+    .locked-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(18px) brightness(0.6);
+    }
+
+    .lock-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .lock-icon svg { width: 32px; height: 32px; opacity: 0.9; }
+
+    /* Bottom stats bar */
+    .bottom-stats {
+      padding: 12px 20px;
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      color: #8a8a8a;
+      border-top: 1px solid #e6e6e6;
+      align-items: center;
+    }
+    .bottom-stats span { display: flex; align-items: center; gap: 4px; }
+    .bottom-stats svg { width: 16px; height: 16px; }
+
+    /* ── Right sidebar ── */
+    .right-sidebar {
+      width: 320px;
+      flex-shrink: 0;
+      background: #f5f5f5;
+    }
+
+    .right-sidebar-inner {
+      position: sticky;
+      top: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .widget-card {
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .widget-sub-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #8a8a8a;
+      margin-bottom: 10px;
+    }
+
+    .widget-offer {
+      font-size: 14px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 10px;
+    }
+
+    .widget-message {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      color: #333;
+      line-height: 1.4;
+    }
+    .widget-message img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #ffd1e3;
+    }
+
+    .widget-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 12px 16px;
+      background: #00aff0;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .widget-btn:hover { background: #0099d4; }
+
+    .widget-normal-price {
+      font-size: 12px;
+      color: #8a8a8a;
+      margin-top: 8px;
+    }
+
+    .widget-footer {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      color: #8a8a8a;
+      flex-wrap: wrap;
+    }
+    .widget-footer a { color: #8a8a8a; text-decoration: none; }
+    .widget-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 900px) {
+      .right-sidebar { display: none; }
+    }
+
+    #give-freely-root-ejkiikneibegknkgimmihdpcbcedgmpo { display: none !important; }
   </style>
 </head>
 <body>
-  <canvas id="neon" aria-hidden="true"></canvas>
-  <div class="bg-shape shape-1" aria-hidden="true"></div>
-  <div class="bg-shape shape-2" aria-hidden="true"></div>
 
-  
-    <a class="cta" href="https://t.me/millyfariabot" target="_blank" rel="noopener noreferrer">
-      <span>Meu Segredo</span>
-      <svg class="plane" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M3 12L21 3L14 21L11 13L3 12Z" fill="currentColor"/>
-      </svg>
-    </a>
-  <script>
-    const canvas = document.getElementById("neon");
-    const ctx = canvas.getContext("2d");
+  <div class="layout">
 
-    const beams = [];
-    const beamCount = 8;
+    <!-- Main content -->
+    <main class="main">
 
-    function resize() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = Math.floor(window.innerWidth * 1.2);
-      const h = Math.floor(window.innerHeight * 1.2);
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
+      <!-- Banner -->
+      <div class="banner">
+        <img src="photo_4915878464901024825_y.jpg" alt="Banner" onerror="this.style.display='none'" />
+      </div>
 
-    function createBeam() {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      return {
-        x: Math.random() * w,
-        y: Math.random() * h,
-        w: 140 + Math.random() * 260,
-        h: 24 + Math.random() * 70,
-        angle: Math.random() * Math.PI,
-        speed: 0.2 + Math.random() * 0.6,
-        hue: 300 + Math.random() * 60
-      };
-    }
+      <!-- Profile header -->
+      <div class="profile-header">
+        <div class="profile-top-row">
+          <div class="avatar-wrap">
+            <img class="avatar" src="photo_4915878464901024825_y.jpg" alt="Milly Faria" onerror="this.style.background='#ffd1e3'" />
+          </div>
+        </div>
 
-    function init() {
-      beams.length = 0;
-      for (let i = 0; i < beamCount; i++) beams.push(createBeam());
-    }
+        <div style="margin-top:10px;">
+          <div class="profile-name">
+            Milly Faria
+            <span class="verify-badge">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </span>
+          </div>
+          <div class="profile-handle">
+            @millyfaria
+          </div>
+        </div>
 
-    function drawBeam(b) {
-      const grad = ctx.createLinearGradient(
-        b.x - b.w,
-        b.y - b.h,
-        b.x + b.w,
-        b.y + b.h
-      );
-      grad.addColorStop(0, `hsla(${b.hue}, 100%, 60%, 0)`);
-      grad.addColorStop(0.5, `hsla(${b.hue}, 100%, 70%, 0.55)`);
-      grad.addColorStop(1, `hsla(${b.hue}, 100%, 60%, 0)`);
+        <div class="bio">
+          here you'll see my most <strong>SPICY</strong> side 🌶️<br />
+          come find out why I'm <a class="bio-link" href="https://t.me/millyfariabot" target="_blank">#1 here</a> 👅✨
+        </div>
 
-      ctx.save();
-      ctx.translate(b.x, b.y);
-      ctx.rotate(b.angle);
-      ctx.fillStyle = grad;
-      ctx.globalCompositeOperation = "lighter";
-      ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h);
-      ctx.restore();
-    }
+        <div class="stats-row">
+          <span><strong>308</strong> Posts</span>
+          <span><strong>418</strong> Photos</span>
+          <span><strong>37</strong> Videos</span>
+          <span><strong>1.14M</strong> Likes</span>
+        </div>
+      </div>
 
-    function animate() {
-      const w = window.innerWidth * 1.2;
-      const h = window.innerHeight * 1.2;
-      ctx.clearRect(0, 0, w, h);
-      for (const b of beams) {
-        b.x += Math.cos(b.angle) * b.speed;
-        b.y += Math.sin(b.angle) * b.speed;
-        if (b.x < -240) b.x = window.innerWidth + 240;
-        if (b.x > window.innerWidth + 240) b.x = -240;
-        if (b.y < -240) b.y = window.innerHeight + 240;
-        if (b.y > window.innerHeight + 240) b.y = -240;
-        drawBeam(b);
-      }
-      requestAnimationFrame(animate);
-    }
+      <!-- Subscription -->
+      <div class="sub-block">
+        <div class="sub-label">Subscription</div>
+        <div class="sub-offer-title">Limited offer: 50% off the first 30 days!</div>
 
-    window.addEventListener("resize", () => {
-      resize();
-      init();
-    });
+        <div class="sub-message">
+          <img class="sub-avatar" src="photo_4915878464901024825_y.jpg" alt="" onerror="this.style.background='#ffd1e3'" />
+          <div class="sub-msg-text">
+            MY BIGGEST SALE EVER!!! only for the next 100 subscribers (9/100 remaining) 🚨🚨 #1 here for a reason 😏
+          </div>
+        </div>
 
-    resize();
-    init();
-    animate();
-  </script>
-  <script>
-  (function(d,t) {
-    var BASE_URL="https://app.chatwoot.com";
-    var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=BASE_URL+"/packs/js/sdk.js";
-    g.async = true;
-    s.parentNode.insertBefore(g,s);
-    g.onload=function(){
-      window.chatwootSDK.run({
-        websiteToken: 'tNTZqEnmewEgDnQnkaqcmX1y',
-        baseUrl: BASE_URL
-      })
-    }
-  })(document,"script");
-</script>
+        <a class="assinar-btn" href="https://t.me/millyfariabot" target="_blank" rel="noopener noreferrer">
+          <span>SUBSCRIBE</span>
+          <span>$5 for 30 days</span>
+        </a>
+        <div class="normal-price">Normal price $10/month</div>
+      </div>
+
+      <!-- Packages -->
+      <div class="pkg-block">
+        <div class="pkg-header">
+          <span>SUBSCRIPTION BUNDLES</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"/>
+          </svg>
+        </div>
+        <a class="pkg-option" href="https://t.me/millyfariabot" target="_blank" rel="noopener noreferrer">
+          <span>3 MONTHS (15% off)</span>
+          <span>$25.50 total</span>
+        </a>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <div class="tab active">308 POSTS</div>
+        <div class="tab">455 MEDIA</div>
+      </div>
+
+      <!-- Locked grid -->
+      <div class="locked-area">
+        <div class="locked-thumb">
+          <img src="photo_4915878464901024825_y.jpg" alt="" />
+          <div class="lock-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17 11V7A5 5 0 007 7v4H5a1 1 0 00-1 1v9a1 1 0 001 1h14a1 1 0 001-1v-9a1 1 0 00-1-1h-2zm-6 6.732V16a1 1 0 112 0v1.732a1 1 0 11-2 0zM9 11V7a3 3 0 116 0v4H9z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="locked-thumb">
+          <img src="photo_4915878464901024825_y.jpg" alt="" />
+          <div class="lock-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17 11V7A5 5 0 007 7v4H5a1 1 0 00-1 1v9a1 1 0 001 1h14a1 1 0 001-1v-9a1 1 0 00-1-1h-2zm-6 6.732V16a1 1 0 112 0v1.732a1 1 0 11-2 0zM9 11V7a3 3 0 116 0v4H9z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="locked-thumb">
+          <img src="photo_4915878464901024825_y.jpg" alt="" />
+          <div class="lock-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17 11V7A5 5 0 007 7v4H5a1 1 0 00-1 1v9a1 1 0 001 1h14a1 1 0 001-1v-9a1 1 0 00-1-1h-2zm-6 6.732V16a1 1 0 112 0v1.732a1 1 0 11-2 0zM9 11V7a3 3 0 116 0v4H9z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom stats bar -->
+      <div class="bottom-stats">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          308
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          418
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          37
+        </span>
+        <span style="margin-left:auto;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </span>
+      </div>
+
+    </main>
+
+    <!-- Right sidebar -->
+    <aside class="right-sidebar">
+      <div class="right-sidebar-inner">
+        <div class="widget-card">
+          <div class="widget-sub-label">Subscription</div>
+          <div class="widget-offer">Limited offer: 50% off the first 30 days!</div>
+
+          <div class="widget-message">
+            <img src="photo_4915878464901024825_y.jpg" alt="" onerror="this.style.background='#ffd1e3'" />
+            <span>MY BIGGEST SALE EVER!!! only for the next 100 subscribers (9/100 remaining) 🚨🚨 #1 here for a reason 😏</span>
+          </div>
+
+          <a class="widget-btn" href="https://t.me/millyfariabot" target="_blank" rel="noopener noreferrer">
+            <span>SUBSCRIBE</span>
+            <span>$5 for 30 days</span>
+          </a>
+          <div class="widget-normal-price">Normal price $10/month</div>
+        </div>
+
+        <div class="widget-footer">
+          <a href="#">Privacy</a>
+          <span>•</span>
+          <a href="#">Cookie Policy</a>
+          <span>•</span>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
 
 </body>
 </html>
